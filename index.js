@@ -37,7 +37,11 @@ autoClickerButton.addEventListener("click", () => {
     autoClickerCount++;
     autoClickerCounter.innerText = autoClickerCount;
     donutCounter.innerText = dountCount;
+    autoClickerCost = Math.floor(autoClickerCost * 1.1); // 10% increase
+    autoClickerCostDisplay.innerText = `Cost: ${autoClickerCost}`; // update cost
   }
 });
+
+
 
 
