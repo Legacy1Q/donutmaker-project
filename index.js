@@ -5,14 +5,15 @@ const donutCounter = document.createElement("h1");
 donutCounter.innerText = dountCount;
 document.querySelector(".container").appendChild(donutCounter);
 
-const donutButton = document.createElement("button");
+const donutButton = document.createElement("img");
 donutButton.innerText = "Donut Maker";
-document.querySelector(".container").appendChild(donutButton);
+document.querySelector(".container").appendChild(donutImage);
 
-donutButton.addEventListener("click", () => {
+donutImage.addEventListener("click", () => {
   dountCount++;
   updateDonutCount();
 });
+
 
 
 // Auto Clicker
@@ -60,6 +61,7 @@ function automaticClick() {
 
 function updateDonutCount() {
   donutCounter.innerText = dountCount;
+  donutImage.alt = donutCount.toString();
 }
 
 activateAutoClickerButton.addEventListener("click", () => {
