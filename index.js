@@ -1,4 +1,4 @@
-// Dount Count
+// Donut Count
 let dountCount = 0;
 
 const donutCounter = document.createElement("h1");
@@ -11,7 +11,7 @@ document.querySelector(".container").appendChild(donutButton);
 
 donutButton.addEventListener("click", () => {
   dountCount++;
-  donutCounter.innerText = dountCount;
+  updateDonutCount();
 });
 
 
@@ -36,12 +36,35 @@ autoClickerButton.addEventListener("click", () => {
     dountCount -= autoClickerCost;
     autoClickerCount++;
     autoClickerCounter.innerText = autoClickerCount;
-    donutCounter.innerText = dountCount;
-    autoClickerCost = Math.floor(autoClickerCost * 1.1); // 10% increase
-    autoClickerCostDisplay.innerText = `Cost: ${autoClickerCost}`; // update cost
+    updateDonutCount();
+    autoClickerCost = Math.floor(autoClickerCost * 1.1);
+    autoClickerCostDisplay.innerText = `Cost: ${autoClickerCost}`;
   }
 });
 
+// Activate Auto Clicker
+let autoClickerActive = false;
 
+const activateAutoClickerButton = document.createElement("button");
+activateAutoClickerButton.innerText = "Activate Auto Clicker";
+document.querySelector(".container").appendChild(activateAutoClickerButton);
 
+function automaticClick() {
+  if (autoClickerActive) {
+    const autoClickerMultiplier = 2;
+    const autoClickerTotal = autoClickerCount * autoClickerMultiplier;
+    dountCount += autoClickerTotal;
+    updateDonutCount();
+  }
+}
 
+function updateDonutCount() {
+  donutCounter.innerText = dountCount;
+}
+
+activateAutoClickerButton.addEventListener("click", () => {
+  if (autoClickerCount > 0) {
+    autoClickerActive = true;
+    setInterval(automaticClick, 1000);
+  }
+});
