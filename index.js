@@ -56,6 +56,18 @@ autoClickerButton.addEventListener("click", () => {
   }
 });
 
+// Reset
+resetButton.addEventListener("click", () => {
+  donutCount = 0;
+  autoClickerCount = 0;
+  autoClickerCost = 100;
+  autoClickerActive = false;
+  updateDonutCount();
+  autoClickerCounter.innerText = autoClickerCount;
+  autoClickerCostDisplay.innerText = `Cost: ${autoClickerCost}`;
+});
+
+
 
 
 
