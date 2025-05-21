@@ -4,50 +4,86 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+      body {
+        font-family: 'Fredoka', sans-serif;
+      }
+    </style>
+
     <title>Donut Clicker</title>
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Donut Maker</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                About
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="company.html">The Company</a></li>
-                <li><a class="dropdown-item" href="inspiration.html">The Inspiration</a></li>
-                <li><a class="dropdown-item" href="developer.html">The Developer</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+  <body class="bg-gray-900 text-white min-h-screen">
+
+    
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-gray-700 shadow-md">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="index.html">🍩 Donut Maker</a>
+      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              About
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="company.html">The Company</a></li>
+              <li><a class="dropdown-item" href="inspiration.html">The Inspiration</a></li>
+              <li><a class="dropdown-item" href="developer.html">The Developer</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-    </nav>
-    <div class="container text-center">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-6 text-center">
-          <h1 id="donutCounter" class="mb-4">0</h1>
-          <img src="images\donut.webp" alt="Donut" id="donutImage" width="150">
+    </div>
+  </nav>
+  
+    <!-- MAIN GAME UI -->
+    <div id="gameArea" class="mx-auto mt-10 px-4 flex flex-col items-center text-center">
+      <!-- Donut Counter -->
+      <h1 id="donutCounter" class="text-5xl font-bold text-yellow-400 mb-6 text-center">0 Donuts</h1>
+    
+      <!-- Donut Image -->
+      <img src="images/donut.webp" alt="Donut" id="donutImage"
+           class="w-40 h-40 rounded-full shadow-lg hover:scale-110 transition-transform cursor-pointer mb-2" />
+      <p class="text-sm text-gray-400 mb-10">Click the donut to make more!</p>
+    
+      <!-- Auto Clicker + Reset Panels in a Row -->
+      <div class="flex flex-col md:flex-row gap-6 w-full max-w-4xl justify-center">
+        
+        <!-- Auto Clicker Panel -->
+        <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center justify-center w-full md:w-1/2">
+          <h2 class="text-xl mb-2">Auto Clickers</h2>
+          <h3 id="autoClickerCounter" class="text-3xl text-yellow-300 mb-4">0</h3>
+          <button id="autoClickerButton"
+                  class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-full shadow-md transition">
+            Purchase Auto Clicker
+          </button>
+          <p id="autoClickerCostDisplay" class="mt-3 text-sm text-gray-300">Cost: 100</p>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-2">
-          <h2 id="autoClickerCounter">0</h2>
-          <button id="autoClickerButton">Auto Clicker</button>
-          <h3 id="autoClickerCostDisplay">Cost: 100</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col text-end">
-          <button id="resetButton">Reset</button>
+    
+        <!-- Reset Panel -->
+        <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center justify-center w-full md:w-1/2">
+          <h2 class="text-xl mb-4">Reset Game</h2>
+          <button id="resetButton"
+                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow-md transition">
+            Reset
+          </button>
         </div>
       </div>
     </div>

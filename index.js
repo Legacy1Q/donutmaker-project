@@ -1,74 +1,53 @@
-// Donut Count
 let donutCount = 0;
-
-const donutButton = document.createElement("img");
-document.querySelector(".container").appendChild(donutImage);
-
-donutImage.addEventListener("click", () => {
-  donutCount++;
-  updateDonutCount();
-});
-
-function updateDonutCount() {
-  donutCounter.innerText = donutCount;
-  donutImage.alt = donutCount.toString(); 
-  updateAutoClickerButton();
-}
-
-// Auto Clicker
-let autoClickerCount = 0;
+let autoClickers = 0;
 let autoClickerCost = 100;
 
-let autoClickerActive = false;
+const donutImage = document.getElementById("donutImage");
+const donutCounter = document.getElementById("donutCounter");
+const autoClickerButton = document.getElementById("autoClickerButton");
+const autoClickerCounter = document.getElementById("autoClickerCounter");
+const autoClickerCostDisplay = document.getElementById("autoClickerCostDisplay");
+const resetButton = document.getElementById("resetButton");
 
-function automaticClick() {
-  if (autoClickerActive) {
-    const autoClickerMultiplier = 2;
-    const autoClickerTotal = autoClickerCount * autoClickerMultiplier;
-    donutCount += autoClickerTotal;
-    updateDonutCount();
-  }
-}
+// 🍩 Clicking the donut manually
+donutImage.addEventListener("click", () => {
+  donutCount++;
+  updateDonutCounter();
+});
 
-function updateAutoClickerButton() {
-  autoClickerButton.disabled = donutCount < autoClickerCost;
-  if (autoClickerButton.disabled) {
-    autoClickerButton.classList.add("disabled");
-  } else {
-    autoClickerButton.classList.remove("disabled");
-  }
-}
-
-updateAutoClickerButton()
+// 🛒 Purchasing an Auto Clicker
 autoClickerButton.addEventListener("click", () => {
   if (donutCount >= autoClickerCost) {
     donutCount -= autoClickerCost;
-    autoClickerCount++;
-    autoClickerCounter.innerText = autoClickerCount;
-    updateDonutCount();
-    autoClickerCost = Math.floor(autoClickerCost * 2.0); 
-    autoClickerCostDisplay.innerText = `Cost: ${autoClickerCost}`; 
-  }
+    autoClickers++;
+    autoClickerCost = Math.floor(autoClickerCost * 1.15); // price increase
 
-  if (autoClickerCount > 0) {
-    autoClickerActive = true;
-    setInterval(automaticClick, 1000);
+    updateDonutCounter();
+    updateAutoClickerUI();
   }
 });
 
-// Reset
+// 🔁 Auto Clicker Function
+setInterval(() => {
+  donutCount += autoClickers;
+  updateDonutCounter();
+}, 1000);
+
+// 🔄 Reset Game
 resetButton.addEventListener("click", () => {
   donutCount = 0;
-  autoClickerCount = 0;
+  autoClickers = 0;
   autoClickerCost = 100;
-  autoClickerActive = false;
-  updateDonutCount();
-  autoClickerCounter.innerText = autoClickerCount;
-  autoClickerCostDisplay.innerText = `Cost: ${autoClickerCost}`;
+  updateDonutCounter();
+  updateAutoClickerUI();
 });
 
+// 🔧 Helper Functions
+function updateDonutCounter() {
+  donutCounter.textContent = `${donutCount} Donuts`;
+}
 
-
-
-
-
+function updateAutoClickerUI() {
+  autoClickerCounter.textContent = autoClickers;
+  autoClickerCostDisplay.textContent = `Cost: ${autoClickerCost}`;
+}
